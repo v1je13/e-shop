@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
 
@@ -29,3 +30,8 @@ Route::put('/products/{product}',[ProductController::class, 'update'])
 
 Route::delete('/products/{product}',[ProductController::class,'destroy'])
             ->name('products.destroy');
+
+
+
+Route::get('/orders/show',[OrderController::class, 'show'])
+        ->name('orders.show');

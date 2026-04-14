@@ -33,14 +33,16 @@
                             <p>{{ $product->price}}</p>
                             <p>{{ $product->category->title}}</p>
                         </div>
-                        <div class="ml-auto">
+                           <div class="ml-auto">
                             <a href="{{ route('products.edit',['product'=>$product]) }}">Редактировать</a>
                             <form action="{{ route('products.destroy',['product'=>$product]) }}" method="POST">
                                 @csrf
                                 @method('delete')
                                 <input type="submit" value="Удалить">
                             </form>
-                        </div>
+                        </div> 
+               
+                        
                     </div>
                 @endforeach
                 @endforeach

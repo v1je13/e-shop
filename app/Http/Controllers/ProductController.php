@@ -4,47 +4,58 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use App\Models\Product;
-use GuzzleHttp\Handler\Proxy;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class ProductController extends Controller
 {
     public function index()
     {
-        $products = Product::all(); //выбираем все строки из таблицы products
+        $products = Product::all(); 
         
         $categories = Category::where('id','>=',1)
                         ->orderBy('title','DESC')
                         ->get();
         
-        return view('products.index', compact('products','categories'));
+        $title = 'Каталог товаров - Интернет-магазин';
+        $description = 'Каталог всех товаров интернет-магазина';
+        return view('products.index', compact('products','categories','title','description'));
     }
     public function create()
     {
         $categories = Category::all();
-        return view('products.create', compact('categories'));
+        $title = 'Создать товар - Интернет-магазин';
+        $description = 'Форма создания нового товара';
+        return view('products.create', compact('categories','title','description'));
     }
-    public function store(Request $request, Product $product)
+    public function store(Request $request)
     {
         $data = $request->validate([
             'title' => 'string|required',
             'price' => 'decimal:0,2|max:100000|min:0|required',
             'description' => 'string|required',
             'category_id' => 'exists:categories,id|required'
-        ]); //валидация
-        $product->create($data); //создаем новую запись в БД
-        return redirect()->back();
+        ]);
+        
+        $data['slug'] = Str::slug($data['title']);
+        
+        Product::create($data);
+        return redirect()->route('products.index');
     }
 
     public function show(Product $product)
     {
-        return view('products.show', compact('product'));
+        $title = $product->title . ' - Интернет-магазин';
+        $description = $product->description;
+        return view('products.show', compact('product','title','description'));
     }
 
     public function edit(Product $product)
     {
         $categories = Category::all();
-        return view('products.edit', compact('product','categories'));
+        $title = 'Редактировать ' . $product->title . ' - Интернет-магазин';
+        $description = 'Форма редактирования товара';
+        return view('products.edit', compact('product','categories','title','description'));
     }
     public function update(Request $request, Product $product)
     {
@@ -53,8 +64,11 @@ class ProductController extends Controller
             'price' => 'decimal:0,2|max:100000|min:0|required',
             'description' => 'string|required',
             'category_id' => 'exists:categories,id|required'
-        ]); //валидация
-        $product->update($data); //создаем новую запись в БД
+        ]);
+        
+        $data['slug'] = Str::slug($data['title']);
+        
+        $product->update($data);
         return redirect()->route('products.index');
     }
 

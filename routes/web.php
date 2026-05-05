@@ -4,11 +4,20 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\CategoryController;
 
-
+// Главная страница
 Route::get('/', function () {
-    return view('welcome');
+    return view('home');
 });
+
+
+Route::get('/categories', [CategoryController::class, 'index'])
+    ->name('categories.index');
+
+
+Route::get('/categories/{category:slug}', [CategoryController::class, 'show'])
+    ->name('categories.show');
 
 Route::get('/products',[ProductController::class, 'index'])
             ->name('products.index');

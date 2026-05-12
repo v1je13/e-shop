@@ -5,12 +5,14 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\ThemeController;
 
 Route::get('/', function () {
     return view('home');
 });
 
-
+Route::post('/theme/toggle', [ThemeController::class, 'toggle'])->name('theme.toggle');
+Route::post('/order/add-item', [OrderController::class, 'addItem'])->name('order.add-item');
 Route::get('/categories', [CategoryController::class, 'index'])
     ->name('categories.index');
 
@@ -42,7 +44,6 @@ Route::delete('/products/{product}',[ProductController::class,'destroy'])
             ->name('products.destroy');
 
 
-
 Route::get('/orders/show',[OrderController::class, 'show'])
         ->name('orders.show');
 
@@ -55,5 +56,6 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+
 
 require __DIR__.'/auth.php';

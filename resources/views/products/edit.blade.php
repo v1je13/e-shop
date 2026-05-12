@@ -1,4 +1,4 @@
-<x-main-layout title="Редактировать товар - E-Shop">
+<x-main-layout title="Редактировать продукт"   description="Здесь можно отредактировать продукт">
     <div class="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <a href="{{ route('products.show', $product) }}" class="inline-flex items-center text-sm text-gray-500 hover:text-gray-900 mb-6">
             ← Назад к товару

@@ -1,4 +1,8 @@
-<x-main-layout title="Категории - Интернет-магазин">
+<x-main-layout 
+    title="Категории"
+    description="Здесь представлены категории"
+    keywords="товары, каталог, магазин, купить"
+>
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <h1 class="text-3xl font-semibold text-gray-900 mb-8">Категории товаров</h1>
         

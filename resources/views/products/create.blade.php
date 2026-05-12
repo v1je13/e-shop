@@ -1,4 +1,5 @@
-<x-main-layout title="Создать товар - E-Shop">
+<x-main-layout title="Создать продукт"   description="Здесь можно создать продукт">
+    <x-main-layout:description>Описание этой конкретной страницы</x-slot:x-main-layout>
     <div class="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <a href="{{ route('products.index') }}" class="inline-flex items-center text-sm text-gray-500 hover:text-gray-900 mb-6">
             ← Назад к каталогу

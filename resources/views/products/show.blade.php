@@ -1,26 +1,29 @@
-<x-main-layout :title="$product->title . ' - Интернет-магазин'">
+<x-main-layout 
+    :title="$product->page_title" 
+    :description="$product->page_description" 
+    :keywords="$product->keywords"
+>
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <a href="{{ route('categories.show', $product->category) }}" class="inline-flex items-center text-sm text-gray-500 hover:text-gray-900 mb-6">
-            ← Назад в категорию
+             Назад в категорию
         </a>
 
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
-            <!-- Слайдер/Фото -->
+          
             <div class="bg-gray-100 rounded-2xl overflow-hidden aspect-square">
                 <img src="{{ Vite::asset($product->path_img) }}" alt="{{ $product->title }}" class="w-full h-full object-cover">
             </div>
 
             <div class="flex flex-col">
-                <!-- Название -->
+              
                 <h1 class="text-3xl font-semibold text-gray-900 mb-4">{{ $product->title }}</h1>
                 
-                <!-- Описание -->
+                
                 <p class="text-gray-600 mb-6">{{ $product->description }}</p>
                 
-                <!-- Цена -->
+                
                 <p class="text-3xl font-bold text-gray-900 mb-8">{{ number_format($product->price, 0, ',', ' ') }} ₽</p>
 
-                <!-- Количество и Кнопка Купить -->
                 <form class="mt-auto flex items-center gap-4">
                     <div class="flex items-center border border-gray-300 rounded-lg">
                         <label for="quantity" class="px-3 text-sm text-gray-600">Количество:</label>

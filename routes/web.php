@@ -16,6 +16,10 @@ Route::post('/order/add-item', [OrderController::class, 'addItem'])->name('order
 Route::get('/categories', [CategoryController::class, 'index'])
     ->name('categories.index');
 
+Route::get('/clean-session',function(){
+    session()->flush();
+    return redirect()->back();
+});
 
 Route::get('/categories/{category:slug}', [CategoryController::class, 'show'])
     ->name('categories.show');

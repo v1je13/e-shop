@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Models\Product;
 use App\Models\Order;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
@@ -13,7 +13,7 @@ class OrderController extends Controller
         $request->validate([
             'product_id' => ['required', 'exists:products,id'], 
         ]);
-        $product = [];
+        $product = Product::where('id', $request->product_id)->first();
         if (!$product)
         {
             abort(403);
@@ -32,6 +32,8 @@ class OrderController extends Controller
             $count = 1;
         }
         Session::put('count', $count);
-        return redirect()->back();
+        return response()->json([
+            'count' => $count,
+        ]);
     }
 }
